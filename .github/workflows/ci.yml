@@ -13,14 +13,13 @@
 # CI runs typechecks and the checked-in fixture/mock test suites only; live
 # portal testing stays a local, on-demand step.
 #
-# Security posture: this template ships pre-approved Claude Code permissions
-# and CLI code that every fork user executes, so the security-guards job
-# fails PRs that widen settings.json permissions, weaken the personal-data
-# gitignore rules, or add package lifecycle scripts; dependency-review flags
-# newly introduced vulnerable/malicious dependencies. Honest limit: a PR can
-# edit this workflow itself, so these guards catch accidents and casual
-# attempts, not a determined author - branch protection with required checks
-# and human review of workflow/settings diffs remain the real backstop.
+# Security posture: this repo ships CLI code that every fork user executes, so
+# the security-guards job fails PRs that weaken the personal-data gitignore
+# rules or add package lifecycle scripts; dependency-review flags newly
+# introduced vulnerable/malicious dependencies. Honest limit: a PR can edit
+# this workflow itself, so these guards catch accidents and casual attempts,
+# not a determined author - branch protection with required checks and human
+# review of workflow diffs remain the real backstop.
 # Actions are pinned to commit SHAs; the token is read-only.
 
 name: CI
@@ -36,7 +35,7 @@ permissions:
 
 jobs:
   lint:
-    name: Lint skills, commands, settings
+    name: Lint skills, commands
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
@@ -52,7 +51,7 @@ jobs:
         run: python tools/check_framework_version.py
 
   security-guards:
-    name: Security guards (permissions, gitignore, manifests)
+    name: Security guards (gitignore, manifests)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
