@@ -28,7 +28,7 @@ REFERENCE_FILES = [
     f"{CANONICAL}/cli/src/helpers.ts",
     f"{CANONICAL}/cli/src/commands/search.ts",
     f"{CANONICAL}/cli/src/commands/detail.ts",
-    ".agents/skills/jobindex-search/cli/tests/helpers.ts",
+    f"{CANONICAL}/cli/tests/helpers.ts",
 ]
 
 
