@@ -4,15 +4,18 @@ Step-by-step instructions for getting the AI Job Search framework running.
 
 ## 1. Prerequisites
 
-### Claude Code
+### DeepSeek runner (this fork)
 
-Install Claude Code (Anthropic's CLI for Claude):
+This fork runs with the DeepSeek runner — Claude Code is **not** required. See
+[`RUNNER.md`](RUNNER.md) for the full DeepSeek workflow, or use Docker for a
+zero-setup experience:
 
 ```bash
-npm install -g @anthropic-ai/claude-code
+docker build -t ai-job-search .
+docker compose run --rm ai-job-search setup
 ```
 
-You'll need an Anthropic API key or a Claude Pro/Team subscription. See the [Claude Code docs](https://docs.anthropic.com/en/docs/claude-code) for details.
+Set your API key via the `DEEPSEEK_API_KEY` environment variable (or `config.json`).
 
 ### Python
 

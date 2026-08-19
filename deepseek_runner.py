@@ -11,7 +11,7 @@ Usage:
 
 Typical:
   python deepseek_runner.py setup                 # interactive profile intake
-  python deepseek_runner.py scrape --portal linkedin-search --location "Berlin"
+  python deepseek_runner.py scrape --portal linkedin-search --location "Dar es Salaam, Tanzania"
   python deepseek_runner.py rank
   python deepseek_runner.py apply "<job URL or pasted posting>"
   python deepseek_runner.py interview "<company> <role>"

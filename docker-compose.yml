@@ -1,0 +1,16 @@
+services:
+  ai-job-search:
+    build: .
+    image: ai-job-search:latest
+    env_file:
+      - .env
+    environment:
+      # Falls back to the host env var; set either here or in .env.
+      DEEPSEEK_API_KEY: ${DEEPSEEK_API_KEY:-}
+    # Mount the repo in-place so documents, compiled CV/cover letters,
+    # scraped jobs, and the tracker CSV persist on your machine.
+    volumes:
+      - .:/app
+    working_dir: /app
+    stdin_open: true
+    tty: true

@@ -13,6 +13,21 @@ per-file diff commands.
 
 ## [Unreleased]
 
+### Changed (this fork)
+
+- **DeepSeek runner replaces Claude Code** - `deepseek_runner.py` and the
+  `deepseek_runner/` package add a Python orchestration layer (command router,
+  context loader, DeepSeek API client, LaTeX/ATS execution). See `RUNNER.md`.
+- **Danish job portals removed** - dropped `jobbank-search`, `jobdanmark-search`,
+  `jobindex-search`, and `jobnet-search`; kept the country-agnostic
+  `linkedin-search` and `freehire-search`.
+- **Claude Code leftovers removed** - deleted `.claude/settings.json` and
+  `.claude/agents/`, stripped settings.json checks from `security_guards.py` /
+  `lint_skills.py` and their tests, and rebranded generated output and prompt
+  guidance from "Claude Code" to the DeepSeek runner.
+- **Dockerized** - added `Dockerfile` (Python + Bun + full TeX Live +
+  poppler-utils), `.dockerignore`, and `docker-compose.yml`.
+
 ### Added
 
 - **`/rank` now persists `strengths` and `gaps` into `seen_jobs.json`** - Step 2's scoring

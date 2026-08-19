@@ -1,0 +1,34 @@
+# Version control
+.git
+.github
+.gitignore
+
+# Local environments / caches
+.venv
+venv
+**/__pycache__
+**/*.pyc
+.pytest_cache
+node_modules
+
+# Secrets and local config
+config.json
+.env
+.env.*
+!.env.example
+
+# Personal data / generated state (never baked into the image)
+job_search_tracker.csv
+salary_data.json
+documents/**
+job_scraper/seen_jobs.json
+gmail_sync/
+reports/
+
+# Compiled / transient artifacts
+*.pdf
+*.aux
+*.log
+*.out
+*.toc
+*.synctex.gz

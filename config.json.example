@@ -1,5 +1,5 @@
 {
-  "//": "Copy this file to config.json (git-ignored) and adjust. The API key is read from the DEEPSEEK_API_KEY env var (recommended) — or set api_key here (less safe).",
+  "//": "Copy this file to config.json (git-ignored) and adjust. The API key is read from the DEEPSEEK_API_KEY env var (recommended) — or set api_key here (less safe). enabled_portals lists country-agnostic CLIs; add local boards (e.g. a Tanzanian portal) via `add-portal` and they are auto-discovered under .agents/skills/.",
   "api_key_env": "DEEPSEEK_API_KEY",
   "api_key": "",
   "base_url": "https://api.deepseek.com",

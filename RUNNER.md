@@ -38,12 +38,48 @@ cd .agents/skills/freehire-search/cli && bun install && cd ../../../..
 export DEEPSEEK_API_KEY=sk-...
 ```
 
+## Docker (recommended)
+
+A `Dockerfile` bundles Python, Bun, a full TeX Live install, and `pdftotext`
+into one image — no local toolchain setup needed:
+
+```bash
+# Build and run a one-off command
+docker build -t ai-job-search .
+docker run --rm -e DEEPSEEK_API_KEY="$DEEPSEEK_API_KEY" ai-job-search --help
+docker run --rm -e DEEPSEEK_API_KEY="$DEEPSEEK_API_KEY" ai-job-search html-report
+
+# Or run interactively with your repo mounted in-place (persists outputs):
+docker compose run --rm ai-job-search setup
+docker compose run --rm ai-job-search apply "<job URL or pasted posting>"
+```
+
+`docker compose run` mounts the repo at `/app`, so your `documents/`, compiled
+CV/cover letters, `job_scraper/`, and `job_search_tracker.csv` are written back
+to your machine. The API key is read from `DEEPSEEK_API_KEY` (host env var or
+`.env`).
+
+## Local market (Tanzania)
+
+The workflow is country-agnostic. This fork ships two market-agnostic portal
+CLIs — `linkedin-search` and `freehire-search` — and none of the former Danish
+boards. For Tanzanian-specific boards, scaffold a portal skill with
+`add-portal` (e.g. point it at Ajira Portal, BrighterMonday Tanzania, or
+ZoomTanzania) and `/scrape` will auto-discover it:
+
+```bash
+.venv/bin/python deepseek_runner.py add-portal
+```
+
+Until a board has its own CLI, the `site:` fallback queries in
+`.claude/skills/job-scraper/search-queries.md` still cover it via web search.
+
 ## Usage
 
 ```bash
 .venv/bin/python deepseek_runner.py setup                 # profile intake (interactive)
 .venv/bin/python deepseek_runner.py apply "<job URL or pasted posting>"
-.venv/bin/python deepseek_runner.py scrape --portal linkedin-search --location "Berlin, Germany"
+.venv/bin/python deepseek_runner.py scrape --portal linkedin-search --location "Dar es Salaam, Tanzania"
 .venv/bin/python deepseek_runner.py rank
 .venv/bin/python deepseek_runner.py interview "<company> <role>"
 .venv/bin/python deepseek_runner.py outcome "<company> <role>"

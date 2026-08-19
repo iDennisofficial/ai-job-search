@@ -58,7 +58,7 @@ def run(config: Config, argv: list[str]) -> int:
             a in ("--location", "-l") for a in args
         ):
             print(f"  {p}: linkedin-search requires --location '<place>' (e.g. "
-                  "'Berlin, Germany' or 'Remote'). Skipping.")
+                  "'Dar es Salaam, Tanzania' or 'Remote'). Skipping.")
             continue
         print(f"Searching {p}…")
         ok, data, err = run_portal(config, p, args)

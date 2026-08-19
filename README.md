@@ -12,9 +12,11 @@
 
 [![CI](https://github.com/MadsLorentzen/ai-job-search/actions/workflows/ci.yml/badge.svg)](https://github.com/MadsLorentzen/ai-job-search/actions/workflows/ci.yml)
 
-An AI-powered job application framework built on [Claude Code](https://claude.com/claude-code). Fork it, fill in your profile, and let Claude evaluate job postings, tailor your CV, write cover letters, and prepare you for interviews.
+An AI-powered job application framework. Fork it, fill in your profile, and let an LLM agent evaluate job postings, tailor your CV, write cover letters, and prepare you for interviews.
 
-> Note: This is an independent open-source project and is not affiliated with, endorsed by, sponsored by, or maintained by Anthropic. Anthropic and Claude Code are referenced only to describe the toolchain this workflow uses.
+> **This fork runs with DeepSeek — no Claude Code required.** The Python runner (`deepseek_runner.py`) replaces the Claude Code layer: see [`RUNNER.md`](RUNNER.md) for the DeepSeek workflow and the Docker one-liner. The upstream project is built on Claude Code; that is referenced below only as upstream context.
+>
+> Note: This is an independent open-source project and is not affiliated with, endorsed by, sponsored by, or maintained by Anthropic. Anthropic and Claude Code are referenced only to describe the toolchain the upstream workflow uses.
 >
 > This project has **no affiliated cryptocurrency, token, or paid sponsorship program**. Anything claiming otherwise is unauthorized and should be treated as a scam. The only ways to support the project are the Ko-fi link below and contributing on GitHub.
 
@@ -59,9 +61,22 @@ files ready    with fit ratings     (LaTeX, tailored)
 
 The framework encodes career guidance best practices, including structured evaluation criteria, forward-looking cover letter framing, and optional salary benchmarking.
 
+## Quick start with Docker
+
+No local toolchain required — the image bundles Python, Bun, a full TeX Live install, and `pdftotext`:
+
+```bash
+docker build -t ai-job-search .
+docker run --rm -e DEEPSEEK_API_KEY="$DEEPSEEK_API_KEY" ai-job-search --help
+
+# Interactive workflow, with your repo mounted in-place so outputs persist:
+docker compose run --rm ai-job-search setup
+docker compose run --rm ai-job-search apply "<job URL or pasted posting>"
+```
+
 ## Prerequisites
 
-- [Claude Code](https://claude.com/claude-code) (CLI). Using a different agent tool (Codex, Antigravity, Gemini CLI)? Start at [`AGENTS.md`](AGENTS.md) - the portal search skills work there out of the box, and [community forks](https://github.com/MadsLorentzen/ai-job-search/discussions/78) adapt the full workflow.
+- A [DeepSeek API key](https://platform.deepseek.com) — this fork uses the DeepSeek runner (`deepseek_runner.py`) instead of Claude Code; see [`RUNNER.md`](RUNNER.md). (Upstream framework is built on [Claude Code](https://claude.com/claude-code); other agent tools start at [`AGENTS.md`](AGENTS.md).)
 - Python 3.10+
 - [Bun](https://bun.sh) (for job search CLI tools)
 - LaTeX distribution with `lualatex` and `xelatex`: [TeX Live](https://tug.org/texlive/), [MacTeX](https://tug.org/mactex/), [TinyTeX](https://yihui.org/tinytex/), or [MiKTeX](https://miktex.org/). The CV compiles with `lualatex` (pdflatex often fails on modern MiKTeX installs with `fontawesome5` font-expansion errors); the cover letter compiles with `xelatex` because `cover.cls` requires `fontspec`. If using a minimal TeX install such as TinyTeX or BasicTeX, install the extra packages listed in [SETUP.md](SETUP.md#minimal-tex-install-tinytexbasictex).
