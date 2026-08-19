@@ -1,0 +1,16 @@
+{
+  "//": "Copy this file to config.json (git-ignored) and adjust. The API key is read from the DEEPSEEK_API_KEY env var (recommended) — or set api_key here (less safe).",
+  "api_key_env": "DEEPSEEK_API_KEY",
+  "api_key": "",
+  "base_url": "https://api.deepseek.com",
+  "models": {
+    "default": "deepseek-chat",
+    "reasoning": "deepseek-reasoner"
+  },
+  "enabled_portals": ["linkedin-search", "freehire-search"],
+  "timeout": 180,
+  "max_retries": 3,
+  "retry_backoff": 2,
+  "max_compile_retries": 3,
+  "portal_bin": "bun"
+}

@@ -1,0 +1,4 @@
+# Python dependencies for the DeepSeek runner (deepseek_runner.py)
+# Install into the project venv:  python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
+requests>=2.31      # fetch job posting content for /apply
+pypdf>=4.0          # PDF page-count verification for the compile loop (fallback to pdfinfo)

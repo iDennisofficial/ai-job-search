@@ -9,6 +9,11 @@ __pycache__/
 .venv/
 venv/
 
+# DeepSeek runner local config + secrets
+config.json
+.env
+gmail_sync/*.json
+
 # Compiled documents
 *.pdf
 *.aux
